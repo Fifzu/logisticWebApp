@@ -1,0 +1,20 @@
+<html xmlns:th="https://thymeleaf.org">
+<table>
+  <tr>
+    <td><h4>Employee Name: </h4></td>
+    <td><h4 th:text="${employee.name}"></h4></td>
+  </tr>
+  <tr>
+    <td><h4>Email Address: </h4></td>
+    <td><h4 th:text="${employee.email}"></h4></td>
+  </tr>
+  <tr>
+    <td><h4>Department: </h4></td>
+    <td><h4 th:text="${employee.department}"></h4></td>
+  </tr>
+  <tr>
+    <td><h4>Entry Date: </h4></td>
+    <td th:text="${#dates.format(employee.entryDate, 'dd-MMM-yyyy')}"></td>
+  </tr>
+</table>
+</html>
