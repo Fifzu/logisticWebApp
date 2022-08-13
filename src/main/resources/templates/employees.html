@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Mitarbeiter Verwaltungstool</title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+<body class="container">
+<form class="col card p-3 my-5" method="post" th:action="@{/}" th:object="${employee}">
+  <div class="form-group">
+    <label for="name">Mitarbeiter Name</label>
+    <input class="form-control" id="name" placeholder="Mitarbeiter Name eingeben" required autocomplete="off"
+           th:field="*{name}"
+           type="text"/>
+  </div>
+  <div class="form-group">
+    <label for="email">Email-Adresse</label>
+    <input class="form-control" id="email" placeholder="Email-Adresse eingeben" required  autocomplete="off"
+           th:field="*{email}"
+           type="text"/>
+  </div>
+  <div class="form-group">
+    <label for="department">Abteilung</label>
+    <select class="form-control " id="department" required th:field="*{department}">
+      <option hidden value="">Abteilung auswählen</option>
+      <option
+              th:each="department : ${T(com.fifzu.logisticWebApp.domain.entities.Department).values()}"
+              th:text="${department}"
+              th:value="${department}">
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="entryDate">Eintrittdatum</label>
+    <input class="form-control" id="entryDate" placeholder="Eintrittdatum eingeben" required autocomplete="off"
+           th:field="*{entryDate}"
+           type="date"/>
+  </div>
+
+  <div>
+    <input class="btn btn-primary" type="submit" value="Mitarbeiter anlegen">
+    <input class="btn btn-dark" type="reset" value="Reset">
+  </div>
+</form>
+<div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
+<table class="table table-striped table-bordered ">
+  <tr>
+    <th>ID</th>
+    <th>Mitarbeiter Name</th>
+    <th>Email-Adresse</th>
+    <th>Abteilung</th>
+    <th>Eintrittsdatum</th>
+    <th>Bearbeiten</th>
+  </tr>
+  <tr th:if="${#lists.isEmpty(employees)}">
+    <td class="text-center" colspan="7">Keine Einträge gefunden.</td>
+  </tr>
+  <tr th:each="employee : ${employees}">
+    <td class="align-middle" th:text="${employee.id}"></td>
+    <td class="align-middle" th:text="${employee.name}"></td>
+    <td class="align-middle" th:text="${employee.email}"></td>
+    <td class="align-middle" th:text="${employee.department}"></td>
+    <td class="align-middle" th:text="${#dates.format(employee.entryDate, 'dd-MMM-yyyy')}"></td>
+    <td class="align-middle text-center"><a class="btn btn-secondary" th:href="'/' + ${employee.id}">✏</a></td>
+  </tr>
+</table>
+</body>
+</html>
