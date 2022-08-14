@@ -72,7 +72,7 @@ public class LogisticsController {
     @RequestMapping(path = "/{id}", method = RequestMethod.POST)
     public RedirectView updateEmployee(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id, @ModelAttribute Employee employee) {
         employeeService.updateEmployee(id, employee);
-        String message = " Mitarbeiter <b>" + employee.getName() + " wurde" +  (employee.isActive() ? "bearbeitet " : "gelöscht ")  + "</b> ✨.";
+        String message = " Mitarbeiter <b>" + employee.getName() + "</b> wurde " +  (employee.isActive() ? "bearbeitet " : "gelöscht ")  + " ✨.";
         RedirectView redirectView = new RedirectView("/", true);
         redirectAttributes.addFlashAttribute("userMessage", message);
         return redirectView;

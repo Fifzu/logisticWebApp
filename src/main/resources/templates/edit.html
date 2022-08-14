@@ -35,6 +35,12 @@
       </option>
     </select>
   </div>
+  <div class="form-group">
+    <label for="entryDate">Eintrittdatum</label>
+    <input class="form-control" id="entryDate" placeholder="Eintrittdatum eingeben" required autocomplete="off"
+           th:field="*{entryDate}"
+           type="date"/>
+  </div>
   <input id="activeFlag" type="hidden" th:field="*{active}">
   <div>
     <input class="btn btn-success" type="submit" value="Update"
