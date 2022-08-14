@@ -70,5 +70,21 @@
     <td class="align-middle text-center"><a class="btn btn-secondary" th:href="'/' + ${employee.id}">✏</a></td>
   </tr>
 </table>
+<div class="container">
+
+  <h2>Suche nach Mitarbeitern</h2>
+  <form th:action="'/search/'" method="post">
+    <select class="form-control " name="Department">
+      <option hidden value="">Abteilung auswählen</option>
+      <option
+              th:each="department : ${T(com.fifzu.logisticWebApp.domain.entities.Department).values()}"
+              th:text="${department}"
+              th:value="${department}">
+      </option>
+    </select>
+    <input type="submit" class="btn btn-info" value="Search"/>
+  </form>
+</div>
+
 </body>
 </html>

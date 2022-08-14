@@ -2,10 +2,7 @@ package com.fifzu.logisticWebApp.domain.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,6 +12,7 @@ public class Employee {
     private Integer id;
     private String name;
     private String email;
+    @Enumerated(EnumType.STRING)
     private Department department;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date entryDate;
