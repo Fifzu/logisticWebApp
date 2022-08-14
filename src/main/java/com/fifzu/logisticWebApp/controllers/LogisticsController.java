@@ -51,7 +51,7 @@ public class LogisticsController {
             return new RedirectView("/", true);
         }
         employeeService.createEmployee(employee);
-        String message = "Mitarbeiter <b>" + employee.getName() + "</b> wurde erzeugt  ✨.";
+        String message = "Mitarbeiter <b>" + employee.getName() + "</b> wurde angelegt  ✨.";
         RedirectView redirectView = new RedirectView("/", true);
         redirectAttributes.addFlashAttribute("userMessage", message);
         return redirectView;

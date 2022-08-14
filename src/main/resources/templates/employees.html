@@ -50,8 +50,9 @@
   </div>
 </form>
 <div class="col card p-3 my-5">
-  <h3>Suche nach Mitarbeitern</h3>
+  <h3>Suche nach Abteilung</h3>
   <form th:action="'/search/'" method="post">
+    <label for="department">Abteilung</label>
     <select class="form-control " name="Department">
       <option hidden value="">Abteilung auswählen</option>
       <option
@@ -60,7 +61,7 @@
               th:value="${department}">
       </option>
     </select>
-    <input type="submit" class="btn btn-primary" value="Suchen"/>
+      <input type="submit" class="btn btn-primary" value="Suchen"/>
   </form>
 </div>
 <div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
