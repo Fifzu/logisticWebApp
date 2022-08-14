@@ -26,10 +26,6 @@ public class LogisticsController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String getEmployees(Model model) {
         List<Employee> employees = employeeService.getEmployees();
-        if (employees.size()==0){
-            employeeService.createDummyEmployees();
-            employees = employeeService.getEmployees();
-        }
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
         return "employees";

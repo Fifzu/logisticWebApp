@@ -6,7 +6,6 @@ import com.fifzu.logisticWebApp.domain.repositories.EmployeeRepository;
 import com.fifzu.logisticWebApp.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,36 +40,6 @@ public class EmployeeService {
             }
         }
         return employees;
-    }
-
-    public void createDummyEmployees() {
-
-        Employee ludwig = new Employee();
-        ludwig.setName("Ludwig Lagerarbeiter");
-        ludwig.setId(1);
-        ludwig.setEmail("ludwig.lagerarbeiter@logistics.com");
-        ludwig.setDepartment(Department.LAGER);
-        ludwig.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        ludwig.setActive(true);
-        createEmployee(ludwig);
-
-        Employee volker = new Employee();
-        volker.setName("Volker Vertrieb");
-        volker.setId(2);
-        volker.setEmail("volker.vertrieb@logistics.com");
-        volker.setDepartment(Department.VERTRIEB);
-        volker.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        volker.setActive(true);
-        createEmployee(volker);
-
-        Employee georg = new Employee();
-        georg.setName("Georg Geschäftsführer");
-        georg.setId(3);
-        georg.setEmail("georg.geschaeftsfuehrer@logistics.com");
-        georg.setDepartment(Department.GESCHÄFTSFÜHRUNG);
-        georg.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        georg.setActive(true);
-        createEmployee(georg);
     }
 
     public Employee updateEmployee(Integer id, Employee request) {

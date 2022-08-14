@@ -11,9 +11,5 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findAllByActiveOrderByIdDesc(boolean active);
-
     Optional<Employee> findByIdAndActive(Integer id, boolean active);
-
-
-
 }
