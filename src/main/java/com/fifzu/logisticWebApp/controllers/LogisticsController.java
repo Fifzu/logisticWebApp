@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,18 +29,15 @@ public class LogisticsController {
         if (employees.size()==0){
             employeeService.createDummyEmployees();
             employees = employeeService.getEmployees();
-            System.out.println("leere liste");
         }
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
         return "employees";
     }
 
-
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public RedirectView createEmployee(RedirectAttributes redirectAttributes, @ModelAttribute Employee employee) {
         employeeService.createEmployee(employee);
-        System.out.println("Hallo im createn!");
         String message = "Mitarbeiter <b>" + employee.getName() + " wurde erzeugt </b> ✨.";
         RedirectView redirectView = new RedirectView("/", true);
         redirectAttributes.addFlashAttribute("userMessage", message);
@@ -53,13 +51,22 @@ public class LogisticsController {
         return "edit";
     }
     @RequestMapping(path = "/search/", method = RequestMethod.POST)
-    public String filterEmployeesByDepartment(Model model,@RequestParam("Department")Department department) {
-        //List<Employee> employees = employeeService.listEmployessByDepartment(department);
-        System.out.println("in methode5: "+ department.toString());
-        List<Employee> employees = employeeService.listEmployeesByDepartment(department);
+    public String filterEmployeesByDepartment(Model model,@RequestParam(name = "Department",required = false )Department department) {
+        List<Employee> employees = new ArrayList<>();
+        String url;
+        if (department != null) {
+            employees = employeeService.listEmployeesByDepartment(department);
+            url="employees";
+        }
+            else
+        {
+            employees=employeeService.getEmployees();
+            url= "redirect:/";
+
+        }
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
-        return "employees";
+        return url;
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.POST)

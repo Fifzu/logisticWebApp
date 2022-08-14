@@ -13,6 +13,7 @@
 <body class="container">
 <form class="col card p-3 my-5" method="post" th:action="@{/}" th:object="${employee}">
   <div class="form-group">
+    <h3>Neuen Mitarbeiter erstellen</h3>
     <label for="name">Mitarbeiter Name</label>
     <input class="form-control" id="name" placeholder="Mitarbeiter Name eingeben" required autocomplete="off"
            th:field="*{name}"
@@ -48,6 +49,20 @@
     <input class="btn btn-dark" type="reset" value="Reset">
   </div>
 </form>
+<div class="col card p-3 my-5">
+  <h3>Suche nach Mitarbeitern</h3>
+  <form th:action="'/search/'" method="post">
+    <select class="form-control " name="Department">
+      <option hidden value="">Abteilung auswählen</option>
+      <option
+              th:each="department : ${T(com.fifzu.logisticWebApp.domain.entities.Department).values()}"
+              th:text="${department}"
+              th:value="${department}">
+      </option>
+    </select>
+    <input type="submit" class="btn btn-primary" value="Suchen"/>
+  </form>
+</div>
 <div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
 <table class="table table-striped table-bordered ">
   <tr>
@@ -70,21 +85,5 @@
     <td class="align-middle text-center"><a class="btn btn-secondary" th:href="'/' + ${employee.id}">✏</a></td>
   </tr>
 </table>
-<div class="container">
-
-  <h2>Suche nach Mitarbeitern</h2>
-  <form th:action="'/search/'" method="post">
-    <select class="form-control " name="Department">
-      <option hidden value="">Abteilung auswählen</option>
-      <option
-              th:each="department : ${T(com.fifzu.logisticWebApp.domain.entities.Department).values()}"
-              th:text="${department}"
-              th:value="${department}">
-      </option>
-    </select>
-    <input type="submit" class="btn btn-info" value="Search"/>
-  </form>
-</div>
-
 </body>
 </html>

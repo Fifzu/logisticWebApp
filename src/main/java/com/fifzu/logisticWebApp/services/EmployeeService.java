@@ -45,28 +45,28 @@ public class EmployeeService {
 
     public void createDummyEmployees() {
 
-        Employee robin = new Employee();
-        robin.setName("Robin");
-        robin.setId(1);
-        robin.setEmail("robin@logistics.com");
-        robin.setDepartment(Department.LAGER);
-        robin.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        robin.setActive(true);
-        createEmployee(robin);
+        Employee ludwig = new Employee();
+        ludwig.setName("Ludwig Lagerarbeiter");
+        ludwig.setId(1);
+        ludwig.setEmail("ludwig.lagerarbeiter@logistics.com");
+        ludwig.setDepartment(Department.LAGER);
+        ludwig.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
+        ludwig.setActive(true);
+        createEmployee(ludwig);
 
         Employee joker = new Employee();
-        joker.setName("Joker");
+        joker.setName("Volker Vertrieb");
         joker.setId(2);
-        joker.setEmail("joker@logistics.com");
+        joker.setEmail("volker.vertrieb@logistics.com");
         joker.setDepartment(Department.VERTRIEB);
         joker.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
         joker.setActive(true);
         createEmployee(joker);
 
         Employee batman = new Employee();
-        batman.setName("Batman");
+        batman.setName("Georg Geschäftsführer");
         batman.setId(3);
-        batman.setEmail("batman@logistics.com");
+        batman.setEmail("georg.geschaeftsfuehrung@logistics.com");
         batman.setDepartment(Department.GESCHÄFTSFÜHRUNG);
         batman.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
         batman.setActive(true);
