@@ -3,15 +3,15 @@ import com.fifzu.logisticWebApp.domain.entities.Department;
 import com.fifzu.logisticWebApp.domain.entities.Employee;
 import com.fifzu.logisticWebApp.services.EmployeeService;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.time.LocalDate;
+import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -36,9 +36,22 @@ public class LogisticsController {
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public RedirectView createEmployee(RedirectAttributes redirectAttributes, @ModelAttribute Employee employee) {
+    public RedirectView createEmployee(RedirectAttributes redirectAttributes, @ModelAttribute @Valid Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/", true);
+            String errormessage = "";
+            List<ObjectError> errors = result.getAllErrors();
+
+            for (ObjectError error : errors)
+            {
+                errormessage += "<b>" + error.getCode() + ": </b>" + error.getDefaultMessage() + ". ";
+            }
+
+            redirectAttributes.addFlashAttribute("userMessage", "Fehler bei Erstellung: " + errormessage);
+            return new RedirectView("/", true);
+        }
         employeeService.createEmployee(employee);
-        String message = "Mitarbeiter <b>" + employee.getName() + " wurde erzeugt </b> ✨.";
+        String message = "Mitarbeiter <b>" + employee.getName() + "</b> wurde erzeugt  ✨.";
         RedirectView redirectView = new RedirectView("/", true);
         redirectAttributes.addFlashAttribute("userMessage", message);
         return redirectView;
@@ -50,6 +63,7 @@ public class LogisticsController {
         model.addAttribute("employee", employee);
         return "edit";
     }
+
     @RequestMapping(path = "/search/", method = RequestMethod.POST)
     public String filterEmployeesByDepartment(Model model,@RequestParam(name = "Department",required = false )Department department) {
         List<Employee> employees = new ArrayList<>();
@@ -62,7 +76,6 @@ public class LogisticsController {
         {
             employees=employeeService.getEmployees();
             url= "redirect:/";
-
         }
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
@@ -70,7 +83,19 @@ public class LogisticsController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.POST)
-    public RedirectView updateEmployee(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id, @ModelAttribute Employee employee) {
+    public RedirectView updateEmployee(RedirectAttributes redirectAttributes, @PathVariable("id") Integer id, @ModelAttribute @Valid Employee employee, BindingResult result) {
+
+        if (result.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/", true);
+            String errormessage = "";
+            List<ObjectError> errors = result.getAllErrors();
+
+            for (ObjectError error : errors) {
+                errormessage += "<b>" + error.getCode() + ": </b>" + error.getDefaultMessage() + ". ";
+            }
+            redirectAttributes.addFlashAttribute("userMessage", "Fehler bei Erstellung: " + errormessage);
+            return new RedirectView("/", true);
+        }
         employeeService.updateEmployee(id, employee);
         String message = " Mitarbeiter <b>" + employee.getName() + "</b> wurde " +  (employee.isActive() ? "bearbeitet " : "gelöscht ")  + " ✨.";
         RedirectView redirectView = new RedirectView("/", true);

@@ -1,22 +1,31 @@
 package com.fifzu.logisticWebApp.domain.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
+
+//Dies ist ein POJO
 
 @Entity
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Size(min = 5)
+    @NotEmpty
     private String name;
+
+    @Email
     private String email;
+
     @Enumerated(EnumType.STRING)
     private Department department;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date entryDate;
-
     private boolean active = true;
 
     public String getName() {

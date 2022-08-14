@@ -18,12 +18,14 @@
     <input class="form-control" id="name" placeholder="Mitarbeiter Name eingeben" required autocomplete="off"
            th:field="*{name}"
            type="text"/>
+    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
   </div>
   <div class="form-group">
     <label for="email">Email-Adresse</label>
     <input class="form-control" id="email" placeholder="Email-Adresse eingeben" required  autocomplete="off"
            th:field="*{email}"
            type="text"/>
+    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
   </div>
   <div class="form-group">
     <label for="department">Abteilung</label>
@@ -36,14 +38,12 @@
       </option>
     </select>
   </div>
-
   <div class="form-group">
     <label for="entryDate">Eintrittdatum</label>
     <input class="form-control" id="entryDate" placeholder="Eintrittdatum eingeben" required autocomplete="off"
            th:field="*{entryDate}"
            type="date"/>
   </div>
-
   <div>
     <input class="btn btn-primary" type="submit" value="Mitarbeiter anlegen">
     <input class="btn btn-dark" type="reset" value="Reset">
