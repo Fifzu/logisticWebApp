@@ -61,7 +61,10 @@
               th:value="${department}">
       </option>
     </select>
-      <input type="submit" class="btn btn-primary" value="Suchen"/>
+      <div>
+        <input type="submit" class="btn btn-primary" value="Suchen"/>
+        <input class="btn btn-dark" type="reset" value="Reset">
+      </div>
   </form>
 </div>
 <div th:if="${userMessage}" th:utext="${userMessage}" class="alert alert-success text-center"></div>
