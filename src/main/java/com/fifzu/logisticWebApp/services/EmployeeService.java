@@ -54,23 +54,23 @@ public class EmployeeService {
         ludwig.setActive(true);
         createEmployee(ludwig);
 
-        Employee joker = new Employee();
-        joker.setName("Volker Vertrieb");
-        joker.setId(2);
-        joker.setEmail("volker.vertrieb@logistics.com");
-        joker.setDepartment(Department.VERTRIEB);
-        joker.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        joker.setActive(true);
-        createEmployee(joker);
+        Employee volker = new Employee();
+        volker.setName("Volker Vertrieb");
+        volker.setId(2);
+        volker.setEmail("volker.vertrieb@logistics.com");
+        volker.setDepartment(Department.VERTRIEB);
+        volker.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
+        volker.setActive(true);
+        createEmployee(volker);
 
-        Employee batman = new Employee();
-        batman.setName("Georg Geschäftsführer");
-        batman.setId(3);
-        batman.setEmail("georg.geschaeftsfuehrung@logistics.com");
-        batman.setDepartment(Department.GESCHÄFTSFÜHRUNG);
-        batman.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
-        batman.setActive(true);
-        createEmployee(batman);
+        Employee georg = new Employee();
+        georg.setName("Georg Geschäftsführer");
+        georg.setId(3);
+        georg.setEmail("georg.geschaeftsfuehrer@logistics.com");
+        georg.setDepartment(Department.GESCHÄFTSFÜHRUNG);
+        georg.setEntryDate(java.sql.Date.valueOf(LocalDate.now()));
+        georg.setActive(true);
+        createEmployee(georg);
     }
 
     public Employee updateEmployee(Integer id, Employee request) {
